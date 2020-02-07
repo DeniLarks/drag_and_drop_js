@@ -16,22 +16,41 @@ var DragAndDrop =
 /*#__PURE__*/
 function () {
   function DragAndDrop(elementSelector) {
-    var _this = this;
-
     _classCallCheck(this, DragAndDrop);
 
     this._elements = document.querySelectorAll(elementSelector);
-    if (this._elements.length > 1) this._elements.forEach(function (el) {
-      return _this._dragAndDrop(el);
-    });else if (this._elements.length == 1) this._dragAndDrop(this._elements[0]);
+
+    this._dragAndDrop();
+
+    this._setDraggableFalse();
   }
 
   _createClass(DragAndDrop, [{
+    key: "_setDraggableFalse",
+    value: function _setDraggableFalse() {
+      this._elements.forEach(function (el) {
+        return el.setAttribute('draggable', false);
+      });
+    }
+  }, {
+    key: "_searchElement",
+    value: function _searchElement(element) {
+      var exist = false;
+
+      this._elements.forEach(function (el) {
+        if (el === element) exist = true;
+      });
+
+      return exist;
+    }
+  }, {
     key: "_dragAndDrop",
-    value: function _dragAndDrop(element) {
-      element.addEventListener('mousedown', function (e) {
-        var target = e.currentTarget;
-        target.style.position = 'absolute';
+    value: function _dragAndDrop() {
+      var _this = this;
+
+      document.addEventListener('mousedown', function (e) {
+        var target = e.target;
+        if (!_this._searchElement(target)) return;
         var offsetX = e.clientX - target.getBoundingClientRect().left;
         var offsetY = e.clientY - target.getBoundingClientRect().top;
         document.addEventListener('mousemove', moveMouse);
@@ -40,6 +59,7 @@ function () {
         });
 
         function moveMouse(e) {
+          target.style.position = 'absolute';
           var x = e.pageX - offsetX;
           var y = e.pageY - offsetY;
           target.style.top = y + 'px';
@@ -62,7 +82,7 @@ var _dragAndDrop = _interopRequireDefault(require("./dragAndDrop"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-new _dragAndDrop["default"]('.box-drop');
+new _dragAndDrop["default"]('.box-drop'); // new DragAndDrop('#drop');
 
 },{"./dragAndDrop":1}]},{},[2])
 

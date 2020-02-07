@@ -10,21 +10,26 @@
       min-height: 50000px;
     }
     .box {
+      display: inline-block;
       width:  70px;
       height: 70px;
       background-color: brown;
+      color: burlywood;
       border-radius: 3px;
+      vertical-align: top;
+    }
+    .image {
+      height: 80px;
+
     }
   </style>
 </head>
 <body>
-  <div class="box box-drop"></div>
-  <br/>
-  <div class="box box-drop"></div>
-  <br/>
-  <div class="box box-drop"></div>
-  <br/>
-  <div class="box box-drop"></div>
+  <span class="box box-drop" id="drop"></span>
+  <img src="./programming.jpg" class="image box-drop" alt="">
+  <span class="box box-drop" id="drop"></span>
+  <span class="box box-drop" id="drop"></span>              
+
 
   <script src="./index.js"></script>
 </body>

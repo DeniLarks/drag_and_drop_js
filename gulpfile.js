@@ -33,6 +33,9 @@ return b.bundle()
   .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('servser-reload', () => {
+  browserSync.reload({stream: true});
+});
 
 gulp.task('watch', () => {
   gulp.watch('src/js/*.js', gulp.parallel('js'));
